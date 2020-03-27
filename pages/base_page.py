@@ -2,8 +2,6 @@ from selenium import webdriver
 
 
 class BasePage:
-    def __init__(self, driver=None):
+    def __init__(self, driver):
         self.base_url = 'http://automationpractice.com/'
-        # Make sure to add chromedriver path in 'PATH' env var
-        self.driver = webdriver.Chrome()
-        self.driver.get(self.base_url)
+        self.driver = driver
