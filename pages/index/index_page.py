@@ -1,4 +1,7 @@
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 from pages.base_page import BasePage
 
@@ -39,11 +42,29 @@ class IndexPage(BasePage):
 
     @property
     def sign_out_button(self):
-        return self.driver.find_element_by_link_text('Sign out')
+        # TODO Need to refactor this into some custom methods, other wise explicit wait will repeat 2 lines wherever needed
+        # 1: Create 'WebDriverWait' instance
+        # 2: call 'WebDriverWait.until'
+        driver_wait = WebDriverWait(self.driver, 2)
+        return driver_wait.until(EC.visibility_of_element_located((By.LINK_TEXT, 'Sign out')))
 
     @property
     def customer_account_button(self):
-        return self.driver.find_element_by_css_selector('a[title="View my customer account"]')
+        driver_wait = WebDriverWait(self.driver, 2)
+        return driver_wait.until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, 'a[title="View my customer account"]')))
+
+    @property
+    def product_reference(self):
+        return self.driver.find_element_by_id('product_reference')
+
+    @property
+    def product_condition(self):
+        return self.driver.find_element_by_id('product_condition')
+
+    @property
+    def short_description_block(self):
+        return self.driver.find_element_by_id('short_description_block')
 
     def _fill_sign_up_personal_info(self):
         self.driver.find_element_by_id('id_gender1').click()

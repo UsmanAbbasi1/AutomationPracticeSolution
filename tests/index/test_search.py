@@ -16,6 +16,6 @@ class TestSearch(BaseTest):
     def test_item_details(self):
         self.index_page.search_item('shirts')
         self.index_page.click_item_from_search_result()
-        self.assertIsNotNone(self.driver.find_element_by_id('product_reference'))
-        self.assertIsNotNone(self.driver.find_element_by_id('product_condition'))
-        self.assertIsNotNone(self.driver.find_element_by_id('short_description_block'))
+        self.assertIsNotNone(self.index_page.product_reference)
+        self.assertIsNotNone(self.index_page.product_condition)
+        self.assertIsNotNone(self.index_page.short_description_block)
